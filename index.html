@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- HEAD START -->
+<title>Deepforge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@500;700&family=Alegreya+Sans:wght@400;500;700&display=swap">
+<!-- HEAD END -->
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<!-- BODY START -->
+<div id="app">
+  <canvas id="game" aria-label="The cavern of your dwarven hold"></canvas>
+
+  <section id="hud-left" class="panel">
+    <header class="brand">
+      <h1>Deepforge</h1>
+      <span class="brand-sub">Stockpile</span>
+    </header>
+    <div id="stock" class="chips"></div>
+  </section>
+
+  <section id="quest" class="panel" aria-live="polite">
+    <div class="eyebrow" id="quest-tier"></div>
+    <h2 id="quest-name"></h2>
+    <p id="quest-lore" class="lore"></p>
+    <div id="quest-reqs"></div>
+    <p id="quest-unlocks" class="unlocks"></p>
+    <button type="button" id="contribute" class="btn">Bring from stockpile</button>
+  </section>
+
+  <section id="inspector" class="panel" hidden>
+    <header class="insp-head">
+      <h2 id="insp-title"></h2>
+      <button type="button" id="insp-close" class="x" aria-label="Close">&times;</button>
+    </header>
+    <p id="insp-desc" class="lore"></p>
+    <div id="insp-body"></div>
+  </section>
+
+  <nav id="buildbar" class="panel" aria-label="Buildings"></nav>
+
+  <div id="controls">
+    <button type="button" id="rotate-btn" class="round" title="Rotate (R)" aria-label="Rotate">&#x21BB;</button>
+    <button type="button" id="zoom-out" class="round" title="Zoom out (-)" aria-label="Zoom out">&minus;</button>
+    <button type="button" id="zoom-in" class="round" title="Zoom in (+)" aria-label="Zoom in">+</button>
+    <button type="button" id="help-btn" class="round" title="How to play (H)" aria-label="How to play">?</button>
+    <button type="button" id="new-btn" class="round" title="Found a new hold" aria-label="New game">&#x2726;</button>
+  </div>
+
+  <div id="toasts"></div>
+  <div id="tip" class="panel" hidden></div>
+
+  <div id="help" class="modal" hidden>
+    <div class="scroll panel">
+      <header class="insp-head">
+        <h2>The Founding of a Hold</h2>
+        <button type="button" id="help-close" class="x" aria-label="Close">&times;</button>
+      </header>
+      <p class="lore">Your clan has claimed a cavern beneath the mountain. Dig, smelt and smith your way to the relics that will make the hold legendary.</p>
+      <ol class="steps">
+        <li><b>Dig by hand.</b> Hold the mouse on an ore seam or rock wall. Rock gives stone and opens new ground.</li>
+        <li><b>Drill.</b> Place a <em>Delving Drill</em> over a seam. It pushes ore out of the side marked with the gold arrow.</li>
+        <li><b>Convey.</b> Drag to lay <em>Conveyors</em>. Goods flow into any building a belt points at, and belts merge from the side.</li>
+        <li><b>Smelt.</b> Feed a <em>Smelting Forge</em> ore and coal. Two stone make a brick.</li>
+        <li><b>Deliver.</b> Belt goods into the <em>Great Hall</em>. They fill the current tier, and the surplus lands in your stockpile for building.</li>
+      </ol>
+      <div class="keys">
+        <div><kbd>Left drag</kbd> place, pan, dig</div>
+        <div><kbd>Right click</kbd> demolish / cancel</div>
+        <div><kbd>1</kbd>–<kbd>8</kbd> pick building</div>
+        <div><kbd>R</kbd> rotate</div>
+        <div><kbd>Q</kbd> copy building under cursor</div>
+        <div><kbd>X</kbd> demolish tool</div>
+        <div><kbd>WASD</kbd> pan · <kbd>Wheel</kbd> zoom</div>
+        <div><kbd>Esc</kbd> clear tool</div>
+      </div>
+      <p class="dim small">Demolishing refunds everything. Your hold saves itself in this browser.</p>
+    </div>
+  </div>
+
+  <div id="confirm-new" class="modal" hidden>
+    <div class="scroll panel narrow">
+      <h2>Found a new hold?</h2>
+      <p class="lore">A fresh cavern will be generated. Your current hold will be lost.</p>
+      <div class="insp-actions">
+        <button type="button" id="confirm-no" class="btn">Keep my hold</button>
+        <button type="button" id="confirm-yes" class="btn danger">Found new hold</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="victory" class="modal" hidden>
+    <div class="scroll panel narrow">
+      <div class="eyebrow">All five tiers complete</div>
+      <h2>The Hold Endures</h2>
+      <p class="lore">Ten relics rest in the Great Hall. Songs of your forges will be sung in every deep for an age. The mountain is yours to keep building.</p>
+      <div class="insp-actions"><button type="button" id="victory-close" class="btn">Return to the forges</button></div>
+    </div>
+  </div>
+</div>
+<!-- BODY END -->
+<!-- SCRIPTS START -->
+<script src="js/data.js"></script>
+<script src="js/world.js"></script>
+<script src="js/sim.js"></script>
+<script src="js/sprites.js"></script>
+<script src="js/render.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+<!-- SCRIPTS END -->
+</body>
+</html>
